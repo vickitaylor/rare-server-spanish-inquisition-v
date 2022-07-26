@@ -1,7 +1,8 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
-from views.post_request import get_post_by_user
+from views.post_requests import get_post_by_user
 
+from views import create_post
 from views.user import create_user, login_user
 from views import get_all_categories
 
@@ -88,6 +89,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             response = login_user(post_body)
         if resource == 'register':
             response = create_user(post_body)
+        if resource == 'posts':
+            response = create_post(post_body)
 
         self.wfile.write(response.encode())
 
