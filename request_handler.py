@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+from views.post_request import get_post_by_user
 
 from views.user import create_user, login_user
 from views import get_all_categories
@@ -66,6 +67,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                     pass
                 else:
                     response = f"{get_all_categories()}"
+
+        else: # There is a ? in the path, run the query param functions
+            (resource, query, id) = parsed
+
+            if query == 'user_id' and resource == 'posts':
+                response = get_post_by_user(id)  
 
         self.wfile.write(response.encode())
 
