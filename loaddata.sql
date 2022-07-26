@@ -1,3 +1,7 @@
+DROP TABLE 'PostTags'
+
+
+
 CREATE TABLE "Users" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "first_name" varchar,
@@ -89,6 +93,7 @@ INSERT INTO Categories ('label') VALUES ('News');
 INSERT INTO Tags ('label') VALUES ('JavaScript');
 INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.com/so/happy');
 
+
 INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (1, 1, 'Cake macaroon chocolate shortbread tart sugar plum.');
 INSERT INTO PostReactions ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
 INSERT INTO PostTags ('post_id', 'tag_id') VALUES (1, 1);
@@ -96,6 +101,13 @@ INSERT INTO Posts ('user_id', 'category_id', 'title', 'publication_date', 'image
 INSERT INTO Subscriptions ('follower_id', 'author_id', 'created_on') VALUES (1, 2, 'Thu Jul 21 2022 15:06:52');
 INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'profile_image_url', 'created_on', active) VALUES ('Slinky', 'Dog', 'slinky@dog.com', 'Dog from Toy Story', 'slinky', 'dog', 'https://pngtree.com/so/happy', 'Thu Jul 21 2022 15:06:52', 1);
 
+<<<<<<< HEAD
+
+SELECT 
+  c.id,
+  c.label
+FROM Categories c
+=======
 SELECT
         p.id,
         p.user_id,
@@ -107,3 +119,4 @@ SELECT
         p.approved
     FROM Posts p
     WHERE p.user_id = 1
+>>>>>>> main
