@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
-from views.post_request import get_post_by_user
+from views.post_requests import get_post_by_user
 
 from views import create_post
 from views.user import create_user, login_user
