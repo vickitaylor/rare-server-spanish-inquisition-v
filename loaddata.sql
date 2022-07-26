@@ -39,7 +39,7 @@ CREATE TABLE "Posts" (
   "image_url" varchar,
   "content" varchar,
   "approved" bit,
-  FOREIGN KEY(`user_id`) REFERENCES `Users`(`id`),
+  FOREIGN KEY(`user_id`) REFERENCES `Users`(`id`)
 );
 
 CREATE TABLE "Comments" (
@@ -88,3 +88,22 @@ CREATE TABLE "Categories" (
 INSERT INTO Categories ('label') VALUES ('News');
 INSERT INTO Tags ('label') VALUES ('JavaScript');
 INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.com/so/happy');
+
+INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (1, 1, 'Cake macaroon chocolate shortbread tart sugar plum.');
+INSERT INTO PostReactions ('user_id', 'reaction_id', 'post_id') VALUES (1, 1, 1);
+INSERT INTO PostTags ('post_id', 'tag_id') VALUES (1, 1);
+INSERT INTO Posts ('user_id', 'category_id', 'title', 'publication_date', 'image_url', 'content', 'approved') VALUES (1, 1, 'Sweets', 'Thu Jul 21 2022 15:06:52', 'https://storcpdkenticomedia.blob.core.windows.net/media/recipemanagementsystem/media/recipe-media-files/recipes/retail/x17/16714-birthday-cake-600x600.jpg?ext=.jpg)', 'Gummi bears halvah soufflé tootsie roll tart sugar plum. Shortbread lollipop cotton candy apple pie tart caramels cupcake caramels icing. Pudding gummi bears sesame snaps toffee pie.', 1);
+INSERT INTO Subscriptions ('follower_id', 'author_id', 'created_on') VALUES (1, 2, 'Thu Jul 21 2022 15:06:52');
+INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'profile_image_url', 'created_on', active) VALUES ('Slinky', 'Dog', 'slinky@dog.com', 'Dog from Toy Story', 'slinky', 'dog', 'https://pngtree.com/so/happy', 'Thu Jul 21 2022 15:06:52', 1);
+
+SELECT
+        p.id,
+        p.user_id,
+        p.category_id,
+        p.title,
+        p.publication_date,
+        p.image_url,
+        p.content,
+        p.approved
+    FROM Posts p
+    WHERE p.user_id = 1
