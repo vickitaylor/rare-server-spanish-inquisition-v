@@ -4,11 +4,11 @@ import json
 from models import Post
 
 def get_post_by_user(user_id):
-    
-    with sqlite3.connect("./posts.sqlite3") as conn:
+
+    with sqlite3.connect("db.sqlite3") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
-        
+
     # SQL query where user_id = ?
     db_cursor.execute("""
     SELECT
@@ -28,7 +28,8 @@ def get_post_by_user(user_id):
     dataset = db_cursor.fetchall()
 
     for row in dataset:
-        post = Post(row['id'], row['title'], row['publication_date'], row['image_url'], row['content'], row['approved'])
+        post = Post(row['id'], row['title'], row['publication_date'], row['image_url'],
+                    row['content'], row['approved'])
         posts.append(post.__dict__)
 
     return json.dumps(posts)
