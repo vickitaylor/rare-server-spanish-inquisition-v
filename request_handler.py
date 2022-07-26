@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 
+from views import create_post
 from views.user import create_user, login_user
 
 
@@ -66,6 +67,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             response = login_user(post_body)
         if resource == 'register':
             response = create_user(post_body)
+        if resource == 'post':
+            response = create_post(post_body)
 
         self.wfile.write(response.encode())
 
