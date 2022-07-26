@@ -5,7 +5,7 @@ from models import Post
 
 def get_post_by_user(user_id):
 
-    with sqlite3.connect("db.sqlite3") as conn:
+    with sqlite3.connect("./db.sqlite3") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
