@@ -101,22 +101,10 @@ INSERT INTO Posts ('user_id', 'category_id', 'title', 'publication_date', 'image
 INSERT INTO Subscriptions ('follower_id', 'author_id', 'created_on') VALUES (1, 2, 'Thu Jul 21 2022 15:06:52');
 INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'profile_image_url', 'created_on', active) VALUES ('Slinky', 'Dog', 'slinky@dog.com', 'Dog from Toy Story', 'slinky', 'dog', 'https://pngtree.com/so/happy', 'Thu Jul 21 2022 15:06:52', 1);
 
-<<<<<<< HEAD
 
-SELECT 
-  c.id,
-  c.label
-FROM Categories c
-=======
-SELECT
-        p.id,
-        p.user_id,
-        p.category_id,
-        p.title,
-        p.publication_date,
-        p.image_url,
-        p.content,
-        p.approved
-    FROM Posts p
-    WHERE p.user_id = 1
->>>>>>> main
+INSERT INTO Categories ('label') VALUES ('News');
+INSERT INTO Categories ('label') VALUES ('Health');
+INSERT INTO Categories ('label') VALUES ('Relationships');
+INSERT INTO Categories ('label') VALUES ('Machine Learning');
+INSERT INTO Categories ('label') VALUES ('Data Science');
+INSERT INTO Categories ('label') VALUES ('Self');
