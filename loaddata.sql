@@ -1,7 +1,3 @@
-DROP TABLE 'PostTags'
-
-
-
 CREATE TABLE "Users" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "first_name" varchar,
@@ -23,7 +19,6 @@ CREATE TABLE "DemotionQueue" (
   FOREIGN KEY(`approver_one_id`) REFERENCES `Users`(`id`),
   PRIMARY KEY (action, admin_id, approver_one_id)
 );
-
 
 CREATE TABLE "Subscriptions" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -90,6 +85,12 @@ CREATE TABLE "Categories" (
 );
 
 INSERT INTO Categories ('label') VALUES ('News');
+INSERT INTO Categories ('label') VALUES ('Data Science');
+INSERT INTO Categories ('label') VALUES ('Machine Learning');
+INSERT INTO Categories ('label') VALUES ('Relationships');
+INSERT INTO Categories ('label') VALUES ('Health');
+INSERT INTO Categories ('label') VALUES ('Self');
+
 INSERT INTO Tags ('label') VALUES ('JavaScript');
 INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.com/so/happy');
 
@@ -101,13 +102,12 @@ INSERT INTO Posts ('user_id', 'category_id', 'title', 'publication_date', 'image
 INSERT INTO Subscriptions ('follower_id', 'author_id', 'created_on') VALUES (1, 2, 'Thu Jul 21 2022 15:06:52');
 INSERT INTO Users ('first_name', 'last_name', 'email', 'bio', 'username', 'password', 'profile_image_url', 'created_on', active) VALUES ('Slinky', 'Dog', 'slinky@dog.com', 'Dog from Toy Story', 'slinky', 'dog', 'https://pngtree.com/so/happy', 'Thu Jul 21 2022 15:06:52', 1);
 
-<<<<<<< HEAD
 
 SELECT 
   c.id,
   c.label
 FROM Categories c
-=======
+
 SELECT
         p.id,
         p.user_id,
@@ -119,4 +119,3 @@ SELECT
         p.approved
     FROM Posts p
     WHERE p.user_id = 1
->>>>>>> main
