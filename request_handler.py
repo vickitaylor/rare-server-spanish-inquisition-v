@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from views.post_requests import get_post_by_user
 
-from views import create_post
+from views import create_post, get_all_posts, get_single_post
 from views.user import create_user, login_user
 from views import get_all_categories
 
@@ -63,17 +63,22 @@ class HandleRequests(BaseHTTPRequestHandler):
         if '?' not in self.path:
             (resource, id) = parsed
 
-            if resource == "categories":
+            if resource == "posts":
+                if id is not None:
+                    response = f"{get_single_post(id)}"
+                else:
+                    response = f"{get_all_posts()}"
+            elif resource == "categories":
                 if id is not None:
                     pass
                 else:
                     response = f"{get_all_categories()}"
 
-        else: # There is a ? in the path, run the query param functions
+        else:  # There is a ? in the path, run the query param functions
             (resource, query, id) = parsed
 
             if query == 'user_id' and resource == 'posts':
-                response = get_post_by_user(id)  
+                response = get_post_by_user(id)
 
         self.wfile.write(response.encode())
 
