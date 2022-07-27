@@ -59,15 +59,15 @@ def create_category(new_cat):
 
 def delete_category(id):
     """
-    Removes the selected animal from the list
+    Removes the selected category from the list
 
     Args:
-        id(int): The id of the animal to be deleted
+        id(int): The id of the category to be deleted
     """
-    with sqlite3.connect("./kennel.sqlite3") as conn:
+    with sqlite3.connect("./db.sqlite3") as conn:
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-            DELETE from animal
+            DELETE from Categories
             WHERE id= ?
             """, (id, ))
