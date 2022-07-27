@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 
-from views import create_post, get_post_by_user
+from views import create_post, get_post_by_user, get_all_comments,create_comment
 from views.user import create_user, login_user
 from views import get_all_categories, create_category
 
@@ -68,6 +68,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_categories()}"
 
+            if resource == "comments":
+                if id is not None:
+                    pass
+                else:
+                    response = f"{get_all_comments()}"
+
         else: # There is a ? in the path, run the query param functions
             (resource, query, id) = parsed
 
@@ -92,6 +98,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             response = create_post(post_body)
         if resource == 'categories':
             response = create_category(post_body)
+        if resource == 'comments':
+            response = create_comment(post_body)
 
         self.wfile.write(response.encode())
 
