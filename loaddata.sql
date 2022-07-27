@@ -1,7 +1,3 @@
-DROP TABLE 'PostTags'
-
-
-
 CREATE TABLE "Users" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "first_name" varchar,
@@ -23,7 +19,6 @@ CREATE TABLE "DemotionQueue" (
   FOREIGN KEY(`approver_one_id`) REFERENCES `Users`(`id`),
   PRIMARY KEY (action, admin_id, approver_one_id)
 );
-
 
 CREATE TABLE "Subscriptions" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -90,6 +85,12 @@ CREATE TABLE "Categories" (
 );
 
 INSERT INTO Categories ('label') VALUES ('News');
+INSERT INTO Categories ('label') VALUES ('Data Science');
+INSERT INTO Categories ('label') VALUES ('Machine Learning');
+INSERT INTO Categories ('label') VALUES ('Relationships');
+INSERT INTO Categories ('label') VALUES ('Health');
+INSERT INTO Categories ('label') VALUES ('Self');
+
 INSERT INTO Tags ('label') VALUES ('JavaScript');
 INSERT INTO Reactions ('label', 'image_url') VALUES ('happy', 'https://pngtree.com/so/happy');
 
