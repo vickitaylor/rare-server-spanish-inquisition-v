@@ -25,35 +25,31 @@ def create_post(new_post):
         return json.dumps(new_post)
 
 
-def get_post_by_user(user_id):
-
+def get_posts_by_user_id(user_id):
+    """Find posts belonging to a user
+    """
     with sqlite3.connect("./db.sqlite3") as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
-    # SQL query where user_id = ?
-    db_cursor.execute("""
-    SELECT
-        p.id,
-        p.user_id,
-        p.category_id,
-        p.title,
-        p.publication_date,
-        p.image_url,
-        p.content,
-        p.approved
-    FROM Posts p
-    WHERE p.user_id = ?
-    """, (user_id))
+        # Write the SQL query to get the information you want
+        db_cursor.execute("""
+        SELECT * FROM Posts p
+        JOIN Users u ON u.id = p.user_id
+        JOIN Categories c ON c.id = p.category_id
+        WHERE p.user_id = ?
+        """, (user_id, ))
 
-    posts = []
-    dataset = db_cursor.fetchall()
+        # # Initialize an empty list to hold all entry representations
+        posts = []
 
-    for row in dataset:
-        post = Post(row['id'], row['title'], row['publication_date'], row['image_url'],
-                    row['content'], row['approved'])
-        posts.append(post.__dict__)
+        # Convert rows of data into a Python list
+        dataset = db_cursor.fetchall()
 
+        # Set representations
+        posts = create_from_query_dict_post_list(dataset)
+
+    # Use `json` package to properly serialize list as JSON
     return json.dumps(posts)
 
 
