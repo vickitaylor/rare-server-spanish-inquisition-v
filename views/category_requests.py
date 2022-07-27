@@ -56,3 +56,18 @@ def create_category(new_cat):
         new_cat['id'] = id
 
     return json.dumps(new_cat)
+
+def delete_category(id):
+    """
+    Removes the selected animal from the list
+
+    Args:
+        id(int): The id of the animal to be deleted
+    """
+    with sqlite3.connect("./kennel.sqlite3") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+            DELETE from animal
+            WHERE id= ?
+            """, (id, ))
