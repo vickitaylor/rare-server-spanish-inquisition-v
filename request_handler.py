@@ -1,9 +1,11 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+from views.comment_requests import get_all_comments, create_comment
 
-from views import create_post, get_post_by_user, get_all_comments,create_comment
 from views.user import create_user, login_user
 from views import get_all_categories, create_category
+from views import create_post, get_posts_by_user_id, get_all_posts, get_single_post
+
 
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -62,7 +64,12 @@ class HandleRequests(BaseHTTPRequestHandler):
         if '?' not in self.path:
             (resource, id) = parsed
 
-            if resource == "categories":
+            if resource == "posts":
+                if id is not None:
+                    response = f"{get_single_post(id)}"
+                else:
+                    response = f"{get_all_posts()}"
+            elif resource == "categories":
                 if id is not None:
                     pass
                 else:
@@ -74,11 +81,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_comments()}"
 
-        else: # There is a ? in the path, run the query param functions
+        else:  # There is a ? in the path, run the query param functions
             (resource, query, id) = parsed
 
             if query == 'user_id' and resource == 'posts':
-                response = get_post_by_user(id)  
+                response = get_posts_by_user_id(id)
 
         self.wfile.write(response.encode())
 
