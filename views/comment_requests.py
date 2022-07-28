@@ -32,7 +32,6 @@ def get_all_comments():
 
         return json.dumps(comments)
 
-
 def create_comment(new_comment):
     with sqlite3.connect("./db.sqlite3") as conn:
         db_cursor = conn.cursor()
