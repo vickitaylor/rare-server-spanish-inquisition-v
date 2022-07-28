@@ -1,11 +1,10 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
-from views.comment_requests import get_all_comments, create_comment
+from views.comment_requests import get_all_comments, create_comment, get_comments_by_post_id
 
 from views.user import create_user, login_user
 from views import get_all_categories, create_category, delete_category
 from views import create_post, get_posts_by_user_id, get_all_posts, get_single_post
-
 
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -86,6 +85,9 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             if query == 'user_id' and resource == 'posts':
                 response = get_posts_by_user_id(id)
+            # View a Post's Comments
+            if query == 'post_id' and resource == 'comments':
+                response = get_comments_by_post_id(id)
 
         self.wfile.write(response.encode())
 
@@ -124,6 +126,7 @@ class HandleRequests(BaseHTTPRequestHandler):
             delete_category(id)
 
         self.wfile.write("".encode())
+
 
 def main():
     """Starts the server on port 8088 using the HandleRequests class
