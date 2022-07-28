@@ -1,3 +1,14 @@
+-- -- *** KEEP THESE HERE ***
+-- DROP TABLE IF EXISTS PostReactions;
+-- DROP TABLE IF EXISTS PostTags;
+-- DROP TABLE IF EXISTS Subscriptions;
+-- DROP TABLE IF EXISTS Comments;
+-- DROP TABLE IF EXISTS Posts;
+-- DROP TABLE IF EXISTS Categories;
+-- DROP TABLE IF EXISTS Tags;
+-- DROP TABLE IF EXISTS Reactions;
+-- DROP TABLE IF EXISTS Users;
+
 CREATE TABLE "Users" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "first_name" varchar,
@@ -110,6 +121,9 @@ INSERT INTO Categories ('label') VALUES ('Machine Learning');
 INSERT INTO Categories ('label') VALUES ('Data Science');
 INSERT INTO Categories ('label') VALUES ('Self');
 
+INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (2, 1, 'Love this.');
+INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (2, 1, 'Commenting for better reach.');
+INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (2, 1, 'What stale bread.');
 
 INSERT INTO Tags ('label') VALUES ('Startup');
 INSERT INTO Tags ('label') VALUES ('Life');
