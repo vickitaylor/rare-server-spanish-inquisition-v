@@ -32,6 +32,7 @@ def get_all_comments():
 
         return json.dumps(comments)
 
+
 def create_comment(new_comment):
     with sqlite3.connect("./db.sqlite3") as conn:
         db_cursor = conn.cursor()
@@ -75,6 +76,22 @@ def get_comments_by_post_id(post_id):
 
     # Use `json` package to properly serialize list as JSON
     return json.dumps(comments)
+
+
+def delete_comment(id):
+    """
+    Removes the selected comment from the list
+
+    Args:
+        id(int): The id of the comment to be deleted
+    """
+    with sqlite3.connect("./db.sqlite3") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+            DELETE from Comments
+            WHERE id= ?
+            """, (id, ))
 
 
 def create_from_query_dict_list(dataset):
