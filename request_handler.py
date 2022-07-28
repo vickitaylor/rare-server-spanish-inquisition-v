@@ -3,7 +3,7 @@ import json
 from views.comment_requests import get_all_comments, create_comment
 
 from views.user import create_user, login_user
-from views import get_all_categories, create_category, delete_category
+from views import get_all_categories, create_category, delete_category, edit_category
 from views import create_post, get_posts_by_user_id, get_all_posts, get_single_post
 
 
@@ -112,7 +112,25 @@ class HandleRequests(BaseHTTPRequestHandler):
 
     def do_PUT(self):
         """Handles PUT requests to the server"""
-        pass
+        self._set_headers(204)
+        content_len = int(self.headers.get('content-length', 0))
+        post_body = self.rfile.read(content_len)
+        post_body = json.loads(post_body)
+
+        (resource, id) = self.parse_url()
+
+        success = False
+
+        if resource == "categories":
+            success = edit_category(id, post_body)
+
+        if success:
+            self._set_headers(204)
+        else:
+            self._set_headers(404)
+
+        # Encode the new data and send in response
+        self.wfile.write("".encode())
 
     def do_DELETE(self):
         """Handle DELETE Requests"""
