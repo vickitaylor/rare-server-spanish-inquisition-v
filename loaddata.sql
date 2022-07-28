@@ -121,7 +121,11 @@ INSERT INTO Categories ('label') VALUES ('Machine Learning');
 INSERT INTO Categories ('label') VALUES ('Data Science');
 INSERT INTO Categories ('label') VALUES ('Self');
 
-
 INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (2, 1, 'Love this.');
 INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (2, 1, 'Commenting for better reach.');
 INSERT INTO Comments ('post_id', 'author_id', 'content') VALUES (2, 1, 'What stale bread.');
+
+INSERT INTO Tags ('label') VALUES ('Startup');
+INSERT INTO Tags ('label') VALUES ('Life');
+INSERT INTO Tags ('label') VALUES ('Travel');
+INSERT INTO Tags ('label') VALUES ('Education');
