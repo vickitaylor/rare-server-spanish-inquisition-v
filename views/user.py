@@ -18,11 +18,11 @@ def login_user(user):
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-            select id, username
+            select id, email
             from Users
-            where username = ?
+            where email = ?
             and password = ?
-        """, (user['username'], user['password']))
+        """, (user['email'], user['password']))
 
         user_from_db = db_cursor.fetchone()
 
