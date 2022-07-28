@@ -109,3 +109,9 @@ INSERT INTO Categories ('label') VALUES ('Relationships');
 INSERT INTO Categories ('label') VALUES ('Machine Learning');
 INSERT INTO Categories ('label') VALUES ('Data Science');
 INSERT INTO Categories ('label') VALUES ('Self');
+
+
+INSERT INTO Tags ('label') VALUES ('Startup');
+INSERT INTO Tags ('label') VALUES ('Life');
+INSERT INTO Tags ('label') VALUES ('Travel');
+INSERT INTO Tags ('label') VALUES ('Education');
