@@ -157,3 +157,32 @@ def create_from_query_dict_post(row):
     post.category = category.__dict__
 
     return post.__dict__
+
+
+def update_post(id, updated_post):
+    with sqlite3.connect("./db.sqlite3") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        UPDATE Posts
+            SET
+                user_id = ?,
+                category_id = ?,
+                title = ?,
+                publication_date = ?,
+                image_url = ?,
+                content = ?,
+                approved = ?
+        WHERE id = ?
+        """, (updated_post['user_id'], updated_post['category_id'], updated_post['title'], updated_post['publication_date'], updated_post['image_url'], updated_post['content'], updated_post['approved'],  id, ))
+
+        # Were any rows affected?
+        # Did the client send an `id` that exists?
+        rows_affected = db_cursor.rowcount
+
+    if rows_affected == 0:
+        # Forces 404 response by main module
+        return False
+    else:
+        # Forces 204 response by main module
+        return True

@@ -4,7 +4,7 @@ from views.comment_requests import get_all_comments, create_comment, get_comment
 
 from views.user import create_user, login_user
 from views import get_all_categories, create_category, delete_category, edit_category
-from views import create_post, get_posts_by_user_id, get_all_posts, get_single_post
+from views import create_post, get_posts_by_user_id, get_all_posts, get_single_post, update_post
 from views import get_all_tags, create_tag, delete_tag, edit_tag
 from views import create_post_tags, get_all_post_tags
 
@@ -144,6 +144,8 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "categories":
             success = edit_category(id, post_body)
+        if resource == "posts":
+            success = update_post(id, post_body)
         
         if resource =="tags":
             success = edit_tag(id, post_body)
