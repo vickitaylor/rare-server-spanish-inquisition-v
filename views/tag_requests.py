@@ -18,7 +18,7 @@ def get_all_tags():
             t.id,
             t.label
         FROM Tags t
-        ORDER BY t.label
+        ORDER BY lower(t.label)
         """)
 
         tags = []
@@ -71,3 +71,30 @@ def delete_tag(id):
             DELETE from Tags
             WHERE id= ?
             """, (id, ))
+
+def edit_tag(id, updated_tag):
+    """ Updates an existing tag
+
+    Args:
+        id (int): Id of the tag being updated
+        updated_tag (string): string of the updated data
+
+    Returns:
+        dict: The updated tag dictionary
+    """
+    with sqlite3.connect("./db.sqlite3") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        UPDATE Tags
+            SET
+                label = ?
+            WHERE id = ?
+        """, (updated_tag['label'], id))
+
+        rows_affected = db_cursor.rowcount
+
+    if rows_affected == 0:
+        return False
+    else:
+        return True
