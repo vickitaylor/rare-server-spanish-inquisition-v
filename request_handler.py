@@ -6,6 +6,7 @@ from views.user import create_user, login_user
 from views import get_all_categories, create_category, delete_category, edit_category
 from views import create_post, get_posts_by_user_id, get_all_posts, get_single_post
 from views import get_all_tags, create_tag, delete_tag, edit_tag
+from views import create_post_tags, get_all_post_tags
 
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -88,6 +89,12 @@ class HandleRequests(BaseHTTPRequestHandler):
                 else:
                     response = f"{get_all_tags()}"
 
+            if resource == "postTags":
+                if id is not None:
+                    pass
+                else:
+                    response = f"{get_all_post_tags()}"
+
         else:  # There is a ? in the path, run the query param functions
             (resource, query, id) = parsed
 
@@ -119,6 +126,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             response = create_comment(post_body)
         if resource == 'tags':
             response = create_tag(post_body)
+        if resource == 'postTags':
+            response = create_post_tags(post_body)
 
         self.wfile.write(response.encode())
 
