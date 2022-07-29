@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
-from views.comment_requests import get_all_comments, create_comment, get_comments_by_post_id, delete_comment
+from views.comment_requests import edit_comment, get_all_comments, create_comment, get_comments_by_post_id, delete_comment
 
 from views.user import create_user, login_user
 from views import get_all_categories, create_category, delete_category, edit_category
@@ -149,6 +149,9 @@ class HandleRequests(BaseHTTPRequestHandler):
         
         if resource =="tags":
             success = edit_tag(id, post_body)
+            
+        if resource =="comments":
+            success = edit_comment(id, post_body)
 
         if success:
             self._set_headers(204)
